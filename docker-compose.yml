@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+  dns-server:
+    container_name: dns-server
+    build:
+      context: .
+      dockerfile: ./dns/Dockerfile
+    ports:
+      - 5300:53
+    volumes:
+      - ./dns/DNS:/app/DNS
+    networks:
+      net1:
+        ipv4_address: 172.16.0.1
+
+  dummy:
+    container_name: dummy
+    build:
+      context: .
+      dockerfile: ./dummy/Dockerfile
+    networks:
+      net1:
+        ipv4_address: 172.16.0.2
+    command: sh -c "echo 'nameserver 172.16.0.1' > /etc/resolv.conf && tail -f /dev/null"
+
+networks:
+  net1:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.16.0.0/16
+          gateway: 172.16.1.1

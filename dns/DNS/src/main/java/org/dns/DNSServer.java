@@ -28,6 +28,7 @@ public class DNSServer {
 
         // Read zones from resource zones.json
         try {
+            // Zone file source of inspiration: https://github.com/howCodeORG/howDNS
             this.zones = this.mapper.readValue(getClass().getResourceAsStream("/zones.json"), typeFactory.constructCollectionType(ArrayList.class, Object.class));
         } catch(Exception e){
             System.out.println("Can't read zones: " + e);
@@ -37,10 +38,10 @@ public class DNSServer {
         // DNS Server
         try {
             // Start socket on port 53 accept 10 connections from 0.0.0.0
-            this.dnsSocket = new DatagramSocket(5300);
+            this.dnsSocket = new DatagramSocket(53, InetAddress.getByName("0.0.0.0"));
             byte[] buffer = new byte[65536];
             DatagramPacket request = new DatagramPacket(buffer, buffer.length);
-            System.out.println("DNS Server started on port 5300");
+            System.out.println("DNS Server started on port 53");
 
             while(true){
                 // Receive DNS requests
@@ -139,7 +140,7 @@ public class DNSServer {
 
         // Add the request id to dnsMessage
         header.setID(new Header(requestData).getID());
-        
+
         // Convert the DNS message to a byte array
         byte[] dnsPacket = dnsMessage.toWire();
 

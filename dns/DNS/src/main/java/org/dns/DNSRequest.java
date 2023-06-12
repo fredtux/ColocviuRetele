@@ -14,11 +14,11 @@ public class DNSRequest {
         this.domain = this.parseDomain(requestData, requestDataLength);
     }
 
+    // Source of inspiration: ChatGPT 3.5
     private String parseDomain(byte[] requestData, int requestDataLength){
         int currPos = 12;
 
         StringBuilder domain = new StringBuilder();
-
 
         while(currPos < requestDataLength){
             int labelLength = requestData[currPos];

@@ -1,5 +1,7 @@
 package org.dns;
 
+// Converted an element of zones.json to Zone class using ChatGPT 3.5
+
 import java.util.List;
 
 public class Zone {
