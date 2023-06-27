@@ -1,10 +1,21 @@
-import java.io.*;
-import java.net.*;
+package org.example;
 
-public class DayTimeClient {
-    public static void main(String[] args) throws IOException {
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.Socket;
+import java.net.UnknownHostException;
 
-        String hostName = "localhost";
+public class Main {
+    public static void main(String[] args) {
+        if (args.length != 1) {
+            System.err.println(
+                    "Usage: java -jar DayTimeClient.jar <host name>");
+            System.exit(1);
+        }
+        
+        String hostName = args[0];
 
         try (
                 Socket echoSocket = new Socket(hostName, 4040);
@@ -27,5 +38,7 @@ public class DayTimeClient {
                     hostName);
             System.exit(1);
         }
+
+
     }
 }

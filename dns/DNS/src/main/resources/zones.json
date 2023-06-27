@@ -26,5 +26,61 @@
         "value": "192.255.255.255"
       }
     ]
+  },
+  {
+    "$origin": "timeserver.org.",
+    "$ttl": 3600,
+    "soa": {
+      "mname": "ns1.timeserver.org.",
+      "rname": "admin.timeserver.org.",
+      "serial": "{time}",
+      "refresh": 3600,
+      "retry": 600,
+      "expire": 604800,
+      "minimum": 86400
+    },
+    "ns": [
+      {
+        "host": "ns1.timeserver.org."
+      },
+      {
+        "host": "ns2.timeserver.org."
+      }
+    ],
+    "a": [
+      {
+        "name": "@",
+        "ttl": 400,
+        "value": "172.16.0.3"
+      }
+    ]
+  },
+  {
+    "$origin": "daytimeserver.org.",
+    "$ttl": 3600,
+    "soa": {
+      "mname": "ns1.daytimeserver.org.",
+      "rname": "admin.daytimeserver.org.",
+      "serial": "{time}",
+      "refresh": 3600,
+      "retry": 600,
+      "expire": 604800,
+      "minimum": 86400
+    },
+    "ns": [
+      {
+        "host": "ns1.daytimeserver.org."
+      },
+      {
+        "host": "ns2.daytimeserver.org."
+      }
+    ],
+    "a": [
+      {
+        "name": "@",
+        "ttl": 400,
+        "value": "172.16.0.4"
+      }
+    ]
   }
 ]

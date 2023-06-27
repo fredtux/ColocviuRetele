@@ -8,14 +8,63 @@ services:
       dockerfile: ./dns/Dockerfile
     ports:
       - 5300:53
-    volumes:
-      - ./dns/DNS:/app/DNS
     networks:
       net1:
         ipv4_address: 172.16.0.1
 
+  time-server:
+    container_name: time-server
+    build:
+      context: .
+      dockerfile: ./TimeServer/Dockerfile
+    ports:
+      - 7070:7070
+    networks:
+      net1:
+        ipv4_address: 172.16.0.3
+  time-client:
+    container_name: time-client
+    build:
+      context: .
+      dockerfile: ./TimeClient/Dockerfile
+    volumes:
+      - type: bind
+        source: ./TimeClient/TimeClient
+        target: /app
+
+  daytime-server:
+    container_name: daytime-server
+    build:
+      context: .
+      dockerfile: ./DayTimeServer/Dockerfile
+    ports:
+      - 4040:4040
+    networks:
+      net1:
+        ipv4_address: 172.16.0.4
+  daytime-client:
+    container_name: daytime-client
+    build:
+      context: .
+      dockerfile: ./DayTimeClient/Dockerfile
+    volumes:
+      - type: bind
+        source: ./DayTimeClient/DayTimeClient
+        target: /app
+
   dummy:
     container_name: dummy
+    depends_on:
+      dns-server:
+        condition: service_started
+      time-server:
+        condition: service_started
+      time-client:
+        condition: service_completed_successfully
+      daytime-server:
+        condition: service_started
+      daytime-client:
+        condition: service_completed_successfully
     build:
       context: .
       dockerfile: ./dummy/Dockerfile
@@ -23,6 +72,9 @@ services:
       net1:
         ipv4_address: 172.16.0.2
     command: sh -c "echo 'nameserver 172.16.0.1' > /etc/resolv.conf && tail -f /dev/null"
+    volumes:
+      - ./TimeClient/TimeClient/target:/app/TimeClient
+      - ./DayTimeClient/DayTimeClient/target:/app/DayTimeClient
 
 networks:
   net1:

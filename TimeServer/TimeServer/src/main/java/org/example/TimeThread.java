@@ -1,3 +1,5 @@
+package org.example;
+
 import java.io.*;
 import java.net.*;
 import java.util.*;
@@ -14,7 +16,7 @@ public class TimeThread extends Thread {
 
     public TimeThread(String name) throws IOException {
         super(name);
-        socket = new DatagramSocket(4445);
+        socket = new DatagramSocket(7070);
 
     }
 
