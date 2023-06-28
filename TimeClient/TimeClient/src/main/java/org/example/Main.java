@@ -4,6 +4,7 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 
+// Inspirat din QuoteClient.java din Laboratorul 8
 public class Main {
     public static void main(String[] args) {
 

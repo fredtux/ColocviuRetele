@@ -5,6 +5,7 @@ import java.net.*;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
 
+// Inspirat din QuoteServerThread.java din Laboratorul 8
 public class TimeThread extends Thread {
 
     protected DatagramSocket socket = null;

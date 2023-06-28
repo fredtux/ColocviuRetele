@@ -7,6 +7,7 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
+// Inspirat din EchoClient.java din Laboratorul 8
 public class Main {
     public static void main(String[] args) {
         if (args.length != 1) {
