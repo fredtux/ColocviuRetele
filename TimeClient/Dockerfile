@@ -7,6 +7,7 @@ RUN mvn dependency:go-offline
 
 COPY ./TimeClient/TimeClient .
 
+RUN mvn package
 
-
-ENTRYPOINT ["mvn", "package"]
+# RUN mkdir -p /app/compiled_jars
+ENTRYPOINT ["cp", "/app/target/TimeClient-1.0-SNAPSHOT-jar-with-dependencies.jar", "/app/compiled_jars/TimeClient.jar"]

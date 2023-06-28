@@ -9,3 +9,4 @@ WORKDIR /app
 RUN wget https://download.oracle.com/java/17/latest/jdk-17_linux-x64_bin.deb
 RUN apt install ./jdk-17_linux-x64_bin.deb -y
 RUN ln -s /usr/lib/jvm/jdk-17/bin/* /usr/bin
+RUN rm jdk-17_linux-x64_bin.deb

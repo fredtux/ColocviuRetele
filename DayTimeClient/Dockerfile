@@ -8,5 +8,7 @@ RUN mvn dependency:go-offline
 COPY ./DayTimeClient/DayTimeClient .
 
 
+RUN mvn package
 
-ENTRYPOINT ["mvn", "package"]
+# RUN mkdir -p /app/compiled_jars
+ENTRYPOINT ["cp", "/app/target/DayTimeClient-1.0-SNAPSHOT-jar-with-dependencies.jar", "/app/compiled_jars/DayTimeClient.jar"]
