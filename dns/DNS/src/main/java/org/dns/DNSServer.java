@@ -82,7 +82,7 @@ public class DNSServer {
         } catch(Exception e){
             System.out.println("Can't handle DNS request: " + e);
         } finally {
-            System.out.println("Killing child...");
+            System.out.println("Exiting child...");
         }
     }
 

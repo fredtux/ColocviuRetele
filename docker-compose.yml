@@ -7,7 +7,7 @@ services:
       context: .
       dockerfile: ./dns/Dockerfile
     ports:
-      - 5300:53
+      - 5300:53/udp
     networks:
       net1:
         ipv4_address: 172.16.0.1
